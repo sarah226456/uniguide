@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGuide - Gestión Universitaria Completa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 700px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin: 0 0 5px 0;
+            font-size: 32px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .description {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 18px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        /* Estilos del Calendario/Horario Editable */
+        .horario-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .dia-col {
+            background-color: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .dia-nombre {
+            font-weight: bold;
+            color: #34495e;
+            font-size: 13px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+        }
+        .clase-input {
+            width: 90%;
+            border: 1px dashed #bdc3c7;
+            background: transparent;
+            font-size: 11px;
+            padding: 5px;
+            border-radius: 4px;
+            resize: none;
+            text-align: center;
+            font-family: inherit;
+            color: #2c3e50;
+            height: 75px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .clase-input:focus {
+            border-color: #2ecc71;
+            background-color: #e8f8f5;
+            color: #117a65;
+        }
+        /* Estilos de Tareas */
+        .input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #3498db;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid #3498db;
+            font-size: 14px;
+        }
+        .btn-eliminar {
+            background-color: #e74c3c;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+        .btn-eliminar:hover { background-color: #c0392b; }
+        .empty-message {
+            text-align: center;
+            color: #bdc3c7;
+            font-style: italic;
+            font-size: 14px;
+        }
+        /* Estilos de Enlaces Académicos */
+        .links-academicos {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .link-card {
+            background: #fff;
+            border: 1px solid #dcdde1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .link-card:hover {
+            background-color: #f1f2f6;
+            border-color: #3498db;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>UniGuide</h1>
+        <div class="subtitle">Plataforma de Apoyo y Organización Académica</div>
+
+        <div class="description">
+            Entre sus funciones principales se encuentran la organización de horarios, registro de tareas y acceso a información académica importante.
+        </div>
+
+        <h2>📅 Horario Semanal Académico</h2>
+        <p style="font-size: 12px; color: #7f8c8d; margin: -5px 0 10px 0;">Puedes hacer clic dentro de cualquier recuadro si deseas modificar tus clases en tiempo real.</p>
+        <div class="horario-grid">
+            <div class="dia-col">
+                <div class="dia-nombre">Lun</div>
+                <textarea class="clase-input" placeholder="Vacío">Fundamentos de Requerimientos de Software (6:00 PM)</textarea>
+            </div>
+            <div class="dia-col">
+                <div class="dia-nombre">Mar</div>
+                <textarea class="clase-input" placeholder="Vacío">Costos y Presupuestos (6:00 PM)&#10;&#10;Métodos de Construcción de Software (6:00 PM)</textarea>
+            </div>
+            <div class="dia-col">
+                <div class="dia-nombre">Mié</div>
+                <textarea class="clase-input" placeholder="Vacío">Matemáticas (7:30 PM)</textarea>
+            </div>
+            <div class="dia-col">
+                <div class="dia-nombre">Jue</div>
+                <textarea class="clase-input" placeholder="Vacío">Inglés (6:00 PM)</textarea>
+            </div>
+            <div class="dia-col">
+                <div class="dia-nombre">Vie</div>
+                <textarea class="clase-input" placeholder="Vacío">Estudio Autónomo</textarea>
+            </div>
+        </div>
+
+        <h2>📝 Registro y Gestión de Tareas</h2>
+        <div class="input-box">
+            <input type="text" id="nuevaTarea" placeholder="Escribe una tarea o recordatorio universitario...">
+            <button onclick="agregarTarea()">Agregar</button>
+        </div>
+        <ul id="listaTareas"></ul>
+        <div id="mensajeVacio" class="empty-message">No tienes tareas pendientes. ¡Buen trabajo!</div>
+
+        <h2>🔗 Información Académica Importante</h2>
+        <div class="links-academicos">
+            <a href="https://ibero.edu.co" target="_blank" class="link-card">🌐 Portal Iberoamericana</a>
+            <a href="https://ibero.edu.co/servicios-para-estudiantes/biblioteca/" target="_blank" class="link-card">📚 Biblioteca Virtual</a>
+            <a href="https://ibero.instructure.com/login/canvas" target="_blank" class="link-card">💻 Aula Virtual Canvas</a>
+        </div>
+    </div>
+
+    <script>
+        const inputTarea = document.getElementById('nuevaTarea');
+        const listaTareas = document.getElementById('listaTareas');
+        const mensajeVacio = document.getElementById('mensajeVacio');
+
+        function agregarTarea() {
+            const textoTarea = inputTarea.value.trim();
+            if (textoTarea === '') {
+                alert('Por favor, escribe una tarea antes de agregar.');
+                return;
+            }
+            const nuevoItem = document.createElement('li');
+            nuevoItem.innerHTML = `
+                <span>${textoTarea}</span>
+                <button class="btn-eliminar" onclick="eliminarTarea(this)">Eliminar</button>
+            `;
+            listaTareas.appendChild(nuevoItem);
+            inputTarea.value = '';
+            actualizarMensaje();
+        }
+
+        function eliminarTarea(boton) {
+            boton.parentElement.remove();
+            actualizarMensaje();
+        }
+
+        function actualizarMensaje() {
+            if (listaTareas.children.length === 0) {
+                mensajeVacio.style.display = 'block';
+            } else {
+                mensajeVacio.style.display = 'none';
+            }
+        }
+
+        inputTarea.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                agregarTarea();
+            }
+        });
+    </script>
+
+</body>
+</html>
